@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio Márcio Maker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== RESET ===== */
+        * { margin:0; padding:0; box-sizing:border-box; font-family: 'Roboto', sans-serif; }
+        body { background-color: #f9f9f9; color: #333; }
+
+        /* ===== HEADER ===== */
+        header {
+            background: linear-gradient(135deg, #4B6CB7, #182848);
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+        }
+        header h1 { font-family: 'Poppins', sans-serif; font-size: 2.5rem; margin-bottom: 10px; }
+        header p { font-size: 1.1rem; color: #dcdcdc; }
+
+        /* ===== SEÇÕES ===== */
+        section { padding: 60px 5%; }
+        section h2 { font-family: 'Poppins', sans-serif; font-size: 2rem; margin-bottom: 30px; text-align:center; color:#182848; }
+
+        /* ===== BOTÕES DE FILTRO ===== */
+        .filter-btns { text-align:center; margin-bottom:40px; }
+        .filter-btns button {
+            padding: 12px 25px;
+            margin:5px;
+            border:none;
+            border-radius:25px;
+            background-color:#4B6CB7;
+            color:white;
+            font-weight:600;
+            cursor:pointer;
+            transition: all 0.3s ease;
+        }
+        .filter-btns button:hover { background-color:#182848; }
+
+        /* ===== GRID DE HABILIDADES ===== */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .skill-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+        .skill-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        .skill-card .icon { 
+            width: 100%;
+            height: 180px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #eef3f7; /* Cor de fundo para o ícone */
+            font-size: 5rem;
+            color: #4B6CB7;
+        }
+        .skill-card-content { padding: 20px; flex:1; }
+        .skill-card h3 { font-family: 'Poppins', sans-serif; margin-bottom: 10px; color: #4B6CB7; }
+        .skill-card p { font-size: 0.95rem; color: #555; }
+
+        /* ===== MODAL ===== */
+        .modal {
+            display:none;
+            position:fixed;
+            top:0; left:0;
+            width:100%; height:100%;
+            background: rgba(0,0,0,0.7);
+            justify-content:center;
+            align-items:center;
+            z-index:1000;
+            padding: 20px;
+        }
+        .modal-content {
+            background:white;
+            padding:30px;
+            border-radius:15px;
+            max-width:600px;
+            width:90%;
+            position:relative;
+            text-align:left;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .modal-content h3 { color:#4B6CB7; margin-bottom:15px; }
+        .modal-content p { color:#333; margin-bottom:15px; line-height: 1.6; }
+        .modal-content .modal-icon { 
+            display: block;
+            text-align: center;
+            font-size: 6rem;
+            color: #4B6CB7;
+            margin-bottom: 20px;
+        }
+        .close-modal {
+            position:absolute;
+            top:15px; right:15px;
+            background:#4B6CB7;
+            color:white;
+            border:none;
+            border-radius:50%;
+            width:30px; height:30px;
+            cursor:pointer;
+            font-weight:bold;
+            line-height:28px;
+            text-align:center;
+        }
+        .modal-content h4 { font-family: 'Poppins', sans-serif; margin-top: 20px; margin-bottom: 10px; color: #182848; }
+        .modal-content ul { margin-bottom: 15px; padding-left: 20px; }
+        .modal-content li { margin-bottom: 5px; }
+
+        /* ===== FOOTER ===== */
+        footer { background-color:#182848; color:white; text-align:center; padding:25px 20px; font-size:0.95rem; }
+
+        /* ===== RESPONSIVO ===== */
+        @media(max-width:600px){
+            header h1 { font-size: 2rem; }
+            section h2 { font-size: 1.6rem; }
+            .skill-card .icon { font-size: 4rem; height: 150px; }
+            .modal-content .modal-icon { font-size: 5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Márcio Maker</h1>
+        <p>Desenvolvedor Frontend & Fullstack Júnior | React, Next.js, Tailwind, CSS, APIs, Animações</p>
+    </header>
+
+    <section id="skills">
+        <h2>Minhas Habilidades</h2>
+        <div class="filter-btns">
+            <button onclick="filterSkills('all')">Todas</button>
+            <button onclick="filterSkills('frontend')">Frontend</button>
+            <button onclick="filterSkills('apis')">APIs</button>
+            <button onclick="filterSkills('ux')">UX / Design</button>
+            <button onclick="filterSkills('tools')">Ferramentas</button>
+        </div>
+        <div class="skills-container">
+
+            <div class="skill-card" data-category="frontend" onclick="openModal('modal-react')">
+                <div class="icon"><i class="fa-brands fa-react"></i></div>
+                <div class="skill-card-content">
+                    <h3>React & Next.js</h3>
+                    <p>Componentização, SSR, hooks, páginas dinâmicas e formulários.</p>
+                </div>
+            </div>
+
+            <div class="skill-card" data-category="frontend" onclick="openModal('modal-tailwind')">
+                <div class="icon"><i class="fa-brands fa-css3-alt"></i></div>
+                <div class="skill-card-content">
+                    <h3>CSS & Tailwind</h3>
+                    <p>Layouts responsivos, Flexbox, Grid e animações.</p>
+                </div>
+            </div>
+
+            <div class="skill-card" data-category="apis" onclick="openModal('modal-apis')">
+                <div class="icon"><i class="fa-solid fa-cloud"></i></div>
+                <div class="skill-card-content">
+                    <h3>APIs REST</h3>
+                    <p>Integração de dados externos e manipulação de JSON.</p>
+                </div>
+            </div>
+
+            <div class="skill-card" data-category="ux" onclick="openModal('modal-gsap')">
+                <div class="icon"><i class="fa-solid fa-shapes"></i></div>
+                <div class="skill-card-content">
+                    <h3>Animações & Interatividade</h3>
+                    <p>GSAP e Framer Motion para sites e apps dinâmicos.</p>
+                </div>
+            </div>
+
+            <div class="skill-card" data-category="tools" onclick="openModal('modal-git')">
+                <div class="icon"><i class="fa-brands fa-github"></i></div>
+                <div class="skill-card-content">
+                    <h3>Git & GitHub</h3>
+                    <p>Controle de versão, commits, branches e portfólio online.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div id="modal-react" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('modal-react')">&times;</button>
+            <div class="modal-icon"><i class="fa-brands fa-react"></i></div>
+            <h3>React & Next.js: O Poder da Interface e Performance</h3>
+            <p><strong>React</strong> é uma biblioteca JavaScript para construir interfaces de usuário (UIs) de forma declarativa e baseada em componentes. Isso significa que você cria blocos de código que podem ser reutilizados em diferentes partes da sua aplicação, tornando o desenvolvimento mais rápido e organizado.</p>
+            <p>Já o <strong>Next.js</strong> é um framework construído sobre o React que resolve problemas de performance e SEO. Ele permite renderizar páginas no servidor (SSR), o que acelera o carregamento e ajuda os motores de busca a indexarem seu site, além de otimizar o roteamento de páginas dinâmicas.</p>
+            <h4>Conceitos-Chave</h4>
+            <ul>
+                <li><strong>Componentização:</strong> Criação de componentes reutilizáveis para construir interfaces complexas.</li>
+                <li><strong>Hooks:</strong> Funções que permitem usar o "estado" e outras funcionalidades do React em componentes de função.</li>
+                <li><strong>Server-Side Rendering (SSR):</strong> Renderização de páginas no servidor para melhor performance.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="modal-tailwind" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('modal-tailwind')">&times;</button>
+            <div class="modal-icon"><i class="fa-brands fa-css3-alt"></i></div>
+            <h3>CSS & Tailwind: Estilo, Flexibilidade e Animação</h3>
+            <p>O <strong>CSS</strong> é a linguagem que dá estilo e aparência à web, controlando cores, fontes, layouts e animações. O <strong>Tailwind CSS</strong> é um framework utilitário que revoluciona a forma como estilizamos, oferecendo classes prontas para uso direto no HTML. Isso acelera o desenvolvimento e mantém a consistência do design, sem a necessidade de criar arquivos CSS extensos.</p>
+            <h4>Conceitos-Chave</h4>
+            <ul>
+                <li><strong>Responsividade:</strong> Criação de layouts que se adaptam a diferentes tamanhos de tela.</li>
+                <li><strong>Flexbox e Grid:</strong> Sistemas de layout modernos para alinhar e distribuir itens.</li>
+                <li><strong>Design System:</strong> A consistência de classes do Tailwind ajuda a manter um sistema de design coeso.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="modal-apis" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('modal-apis')">&times;</button>
+            <div class="modal-icon"><i class="fa-solid fa-cloud"></i></div>
+            <h3>APIs REST: A Ponte para Dados e Integrações</h3>
+            <p>Uma <strong>API</strong> (Interface de Programação de Aplicações) é como um garçom entre seu aplicativo e um servidor. Ela permite que seu site ou app "peça" dados (por exemplo, informações de um produto, o clima ou dados de redes sociais) e receba uma resposta padronizada, geralmente em formato <strong>JSON</strong>. As APIs REST usam os métodos do protocolo HTTP (como GET, POST, PUT) para realizar essas operações.</p>
+            <h4>Conceitos-Chave</h4>
+            <ul>
+                <li><strong>Comunicação Cliente-Servidor:</strong> Entender como o frontend se comunica com o backend.</li>
+                <li><strong>Métodos HTTP (GET, POST, PUT, DELETE):</strong> O "idioma" da comunicação. Ex: <strong>GET</strong> para buscar dados, <strong>POST</strong> para enviar dados.</li>
+                <li><strong>JSON:</strong> O formato de dados mais comum para troca de informações.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="modal-gsap" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('modal-gsap')">&times;</button>
+            <div class="modal-icon"><i class="fa-solid fa-shapes"></i></div>
+            <h3>GSAP & Framer Motion: Dando Vida à Interface</h3>
+            <p>Animações não são apenas para "enfeitar". Elas guiam a atenção do usuário, fornecem feedback visual e tornam a experiência mais agradável e intuitiva. Bibliotecas como <strong>GSAP</strong> e <strong>Framer Motion</strong> simplificam a criação de animações complexas, permitindo que você crie transições suaves, movimentos de elementos e efeitos de parallax com poucas linhas de código.</p>
+            <h4>Conceitos-Chave</h4>
+            <ul>
+                <li><strong>UX (User Experience):</strong> Como as animações melhoram a experiência de uso.</li>
+                <li><strong>Feedback Visual:</strong> Mostrar ao usuário que algo aconteceu (ex: um botão clicado).</li>
+                <li><strong>Microinterações:</strong> Pequenas animações que adicionam personalidade a uma interface.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="modal-git" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('modal-git')">&times;</button>
+            <div class="modal-icon"><i class="fa-brands fa-github"></i></div>
+            <h3>Git & GitHub: O Essencial para o Trabalho em Equipe</h3>
+            <p><strong>Git</strong> é um sistema de controle de versão que rastreia todas as mudanças no seu código. Ele é crucial para desenvolvimento, pois permite que você volte a versões anteriores, trabalhe em funcionalidades separadas sem quebrar o código principal e integre o trabalho de várias pessoas.</p>
+            <p><strong>GitHub</strong> é uma plataforma online que hospeda repositórios Git, permitindo que você compartilhe seu código, colabore com outros desenvolvedores e mostre seus projetos em seu portfólio.</p>
+            <h4>Conceitos-Chave</h4>
+            <ul>
+                <li><strong>Commit:</strong> O ato de salvar um conjunto de mudanças no histórico.</li>
+                <li><strong>Branch:</strong> Uma "ramificação" do código principal para desenvolver uma nova funcionalidade isoladamente.</li>
+                <li><strong>Merge:</strong> Ação de juntar as mudanças de uma branch de volta na principal.</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Márcio Maker | Desenvolvedor Frontend & Fullstack Júnior</p>
+    </footer>
+
+    <script>
+        function filterSkills(category) {
+            const cards = document.querySelectorAll('.skill-card');
+            cards.forEach(card => {
+                if(category === 'all' || card.getAttribute('data-category') === category){
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function openModal(id){
+            document.getElementById(id).style.display = 'flex';
+        }
+
+        function closeModal(id){
+            document.getElementById(id).style.display = 'none';
+        }
+    </script>
+</body>
+</html>
