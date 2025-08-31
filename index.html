@@ -7,14 +7,63 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ===== RESET & TIPOGRAFIA ===== */
+        /* ===== VARIÁVEIS CSS (MODO CLARO) ===== */
+        :root {
+            --bg-color-light: #e9f2ff;
+            --bg-color-dark: #f0f4f9;
+            --text-color-primary: #333;
+            --text-color-secondary: #666;
+            --heading-color: #3a3f51;
+            --card-bg-color: #fff;
+            --header-bg-gradient: linear-gradient(135deg, #6a11cb, #2575fc);
+            --button-bg-color: #2575fc;
+            --button-hover-bg-color: #6a11cb;
+            --icon-color: #2575fc;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        /* ===== VARIÁVEIS CSS (MODO ESCURO) ===== */
+        .dark-mode {
+            --bg-color-light: #121212;
+            --bg-color-dark: #1e1e1e;
+            --text-color-primary: #e0e0e0;
+            --text-color-secondary: #b0b0b0;
+            --heading-color: #f5f5f5;
+            --card-bg-color: #242424;
+            --header-bg-gradient: linear-gradient(135deg, #1f1c2c, #3f3f51);
+            --button-bg-color: #8a2be2;
+            --button-hover-bg-color: #4b0082;
+            --icon-color: #8a2be2;
+            --shadow-color: rgba(0, 0, 0, 0.4);
+        }
+
+        /* ===== ESTILOS GERAIS ===== */
         * { margin:0; padding:0; box-sizing:border-box; }
-        body { background-color: #e9f2ff; color: #333; font-family: 'Open Sans', sans-serif; }
-        h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; }
+        body { background-color: var(--bg-color-light); color: var(--text-color-primary); font-family: 'Open Sans', sans-serif; transition: background-color 0.5s, color 0.5s; }
+        h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; color: var(--heading-color); }
+        a { color: var(--button-bg-color); text-decoration: none; }
+        a:hover { color: var(--button-hover-bg-color); }
+
+        /* ===== BOTÃO DE MODO ESCURO ===== */
+        .dark-mode-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+            z-index: 10;
+        }
+        .dark-mode-toggle:hover {
+            transform: scale(1.1);
+        }
 
         /* ===== HEADER ===== */
         header {
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            background: var(--header-bg-gradient);
             color: white;
             text-align: center;
             padding: 80px 20px;
@@ -32,12 +81,12 @@
             transform: skewY(-5deg);
             transform-origin: top left;
         }
-        header h1 { font-size: 3rem; margin-bottom: 10px; font-weight: 700; z-index: 1; position: relative; }
+        header h1 { font-size: 3rem; margin-bottom: 10px; font-weight: 700; z-index: 1; position: relative; color: white; }
         header p { font-size: 1.2rem; color: #e0eaff; z-index: 1; position: relative; }
 
         /* ===== SEÇÕES ===== */
         section { padding: 60px 5%; }
-        section h2 { font-size: 2.2rem; margin-bottom: 40px; text-align:center; color:#3a3f51; font-weight: 700; }
+        section h2 { font-size: 2.2rem; margin-bottom: 40px; text-align:center; font-weight: 700; }
 
         /* ===== BOTÕES DE FILTRO ===== */
         .filter-btns { text-align:center; margin-bottom:40px; }
@@ -46,17 +95,17 @@
             margin: 8px;
             border: none;
             border-radius: 50px;
-            background-color: #2575fc;
+            background-color: var(--button-bg-color);
             color: white;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.4s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px var(--shadow-color);
         }
         .filter-btns button:hover {
-            background-color: #6a11cb;
+            background-color: var(--button-hover-bg-color);
             transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 6px 15px var(--shadow-color);
         }
 
         /* ===== GRID DE HABILIDADES ===== */
@@ -66,10 +115,10 @@
             gap: 25px;
         }
         .skill-card {
-            background: white;
+            background: var(--card-bg-color);
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px var(--shadow-color);
             transition: transform 0.4s, box-shadow 0.4s;
             cursor: pointer;
             display: flex;
@@ -78,7 +127,7 @@
         }
         .skill-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+            box-shadow: 0 20px 40px var(--shadow-color);
         }
         .skill-card .icon { 
             width: 100%;
@@ -86,21 +135,21 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #f0f4f9;
+            background-color: var(--bg-color-dark);
             font-size: 5rem;
-            color: #2575fc;
+            color: var(--icon-color);
             transition: color 0.4s;
         }
         .skill-card:hover .icon {
-            color: #6a11cb;
+            color: var(--button-hover-bg-color);
         }
         .skill-card-content { padding: 25px; flex:1; }
-        .skill-card h3 { font-size: 1.5rem; margin-bottom: 10px; color: #3a3f51; font-weight: 600; }
-        .skill-card p { font-size: 1rem; color: #666; }
+        .skill-card h3 { font-size: 1.5rem; margin-bottom: 10px; font-weight: 600; }
+        .skill-card p { font-size: 1rem; color: var(--text-color-secondary); }
 
         /* ===== CARROSSEL DE PROJETOS ===== */
         #projects {
-            background-color: #f0f4f9;
+            background-color: var(--bg-color-dark);
         }
         .carousel-container {
             overflow: hidden;
@@ -118,15 +167,15 @@
             margin: 0 15px;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 20px var(--shadow-color);
             transition: transform 0.3s, box-shadow 0.3s;
-            background-color: white;
+            background-color: var(--card-bg-color);
             display: flex;
             flex-direction: column;
         }
         .project-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 15px 30px var(--shadow-color);
         }
         .project-card img {
             width: 100%;
@@ -145,20 +194,19 @@
         .project-card-content h3 {
             font-size: 1.2rem;
             margin-bottom: 10px;
-            color: #3a3f51;
         }
         .project-card-content a {
             display: inline-block;
             padding: 10px 20px;
             border-radius: 50px;
-            background-color: #2575fc;
+            background-color: var(--button-bg-color);
             color: white;
             text-decoration: none;
             font-weight: 600;
             transition: background-color 0.3s;
         }
         .project-card-content a:hover {
-            background-color: #6a11cb;
+            background-color: var(--button-hover-bg-color);
         }
         
         /* Animação do carrossel */
@@ -186,7 +234,7 @@
             animation: fadeIn 0.4s forwards;
         }
         .modal-content {
-            background:white;
+            background: var(--card-bg-color);
             padding:30px;
             border-radius:20px;
             max-width:700px;
@@ -196,21 +244,21 @@
             max-height: 90vh;
             overflow-y: auto;
             animation: slideIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            box-shadow: 0 25px 50px var(--shadow-color);
         }
-        .modal-content h3 { color:#6a11cb; margin-bottom:15px; font-size: 2rem; font-weight: 700; }
-        .modal-content p { color:#444; margin-bottom:15px; line-height: 1.8; }
+        .modal-content h3 { font-size: 2rem; margin-bottom:15px; font-weight: 700; }
+        .modal-content p { color: var(--text-color-secondary); margin-bottom:15px; line-height: 1.8; }
         .modal-content .modal-icon { 
             display: block;
             text-align: center;
             font-size: 7rem;
-            color: #2575fc;
+            color: var(--icon-color);
             margin-bottom: 25px;
         }
         .close-modal {
             position:absolute;
             top:15px; right:15px;
-            background:#2575fc;
+            background: var(--button-bg-color);
             color:white;
             border:none;
             border-radius:50%;
@@ -220,10 +268,10 @@
             transition: all 0.3s ease;
         }
         .close-modal:hover {
-            background-color: #6a11cb;
+            background-color: var(--button-hover-bg-color);
             transform: rotate(90deg);
         }
-        .modal-content h4 { font-size: 1.2rem; margin-top: 20px; margin-bottom: 10px; color: #3a3f51; font-weight: 600; }
+        .modal-content h4 { font-size: 1.2rem; margin-top: 20px; margin-bottom: 10px; font-weight: 600; }
         .modal-content ul { margin-bottom: 15px; padding-left: 20px; }
         .modal-content li { margin-bottom: 8px; line-height: 1.6; }
 
@@ -266,6 +314,9 @@
 <body>
 
     <header>
+        <button id="darkModeToggle" class="dark-mode-toggle">
+            <i class="fas fa-moon"></i>
+        </button>
         <h1>Márcio Maker</h1>
         <p>Desenvolvedor Frontend & Fullstack Júnior | React, Next.js, APIs e Animações</p>
     </header>
@@ -329,76 +380,41 @@
         <div class="carousel-container">
             <div class="carousel-track">
                 <div class="project-card">
-                    <img src="https://images.unsplash.com/photo-1550993962-e64e9a11ac89?q=80&w=2787&auto=format&fit=crop" alt="Projeto 1: Clone do Spotify">
+                    <img src="https://s3-alpha.figma.com/hub/file/936981378/40fd9ce4-a7a2-468d-b87c-1dabb77298e2-cover.png" alt="Projeto 1: Clone do Spotify">
                     <div class="project-card-content">
-                        <h3>Clone do Spotify</h3>
+                        <h3>Clone do Netflix</h3>
                         <a href="https://github.com/seu-usuario/clone-spotify" target="_blank">Saiba Mais</a>
                     </div>
                 </div>
                 <div class="project-card">
-                    <img src="https://images.unsplash.com/photo-1581291518857-4e27b7483669?q=80&w=2800&auto=format&fit=crop" alt="Projeto 2: App de Previsão do Tempo">
+                    <img src="https://media.istockphoto.com/vectors/weather-forecast-widgets-template-vector-illustration-vector-id514880179?k=6&m=514880179&s=612x612&w=0&h=y6JQeFRTZO3DJ-X-20RwPsvlphC2cQJqZmyceQFaBeQ=" alt="Projeto 2: App de Previsão do Tempo">
                     <div class="project-card-content">
                         <h3>App de Previsão do Tempo</h3>
                         <a href="https://github.com/seu-usuario/previsao-do-tempo-app" target="_blank">Saiba Mais</a>
                     </div>
                 </div>
                 <div class="project-card">
-                    <img src="https://images.unsplash.com/photo-1581291518857-4e27b7483669?q=80&w=2800&auto=format&fit=crop" alt="Projeto 3: Blog Moderno com Next.js">
+                    <img src="https://tse3.mm.bing.net/th/id/OIP.McvQmCNIZbhfslWhcgHWOQHaEK?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Projeto 3: Blog Moderno com Next.js">
                     <div class="project-card-content">
                         <h3>Blog Moderno com Next.js</h3>
                         <a href="https://github.com/seu-usuario/nextjs-blog" target="_blank">Saiba Mais</a>
                     </div>
                 </div>
                 <div class="project-card">
-                    <img src="https://images.unsplash.com/photo-1550993962-e64e9a11ac89?q=80&w=2787&auto=format&fit=crop" alt="Projeto 4: E-commerce com React">
+                    <img src="https://strapi.dhiwise.com/uploads/React_e_Commerce_Build_Dynamic_Web_Applications_for_Seamless_User_Experiences_OG_Image_d494203f49.webp" alt="Projeto 4: E-commerce com React">
                     <div class="project-card-content">
                         <h3>E-commerce com React</h3>
                         <a href="https://github.com/seu-usuario/react-ecommerce" target="_blank">Saiba Mais</a>
                     </div>
                 </div>
                 <div class="project-card">
-                    <img src="https://images.unsplash.com/photo-1581291518857-4e27b7483669?q=80&w=2800&auto=format&fit=crop" alt="Projeto 5: Landing Page Animada">
+                    <img src="https://th.bing.com/th/id/R.3bb300b30f11d2bf9db19e6fad219899?rik=zIKva71iKmhkNw&pid=ImgRaw&r=0" alt="Projeto 5: Landing Page Animada">
                     <div class="project-card-content">
                         <h3>Landing Page Animada</h3>
                         <a href="https://github.com/seu-usuario/landing-page-animada" target="_blank">Saiba Mais</a>
                     </div>
                 </div>
                 
-                <div class="project-card">
-                    <img src="https://images.unsplash.com/photo-1550993962-e64e9a11ac89?q=80&w=2787&auto=format&fit=crop" alt="Projeto 1: Clone do Spotify">
-                    <div class="project-card-content">
-                        <h3>Clone do Spotify</h3>
-                        <a href="https://github.com/seu-usuario/clone-spotify" target="_blank">Saiba Mais</a>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <img src="https://images.unsplash.com/photo-1581291518857-4e27b7483669?q=80&w=2800&auto=format&fit=crop" alt="Projeto 2: App de Previsão do Tempo">
-                    <div class="project-card-content">
-                        <h3>App de Previsão do Tempo</h3>
-                        <a href="https://github.com/seu-usuario/previsao-do-tempo-app" target="_blank">Saiba Mais</a>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <img src="https://images.unsplash.com/photo-1581291518857-4e27b7483669?q=80&w=2800&auto=format&fit=crop" alt="Projeto 3: Blog Moderno com Next.js">
-                    <div class="project-card-content">
-                        <h3>Blog Moderno com Next.js</h3>
-                        <a href="https://github.com/seu-usuario/nextjs-blog" target="_blank">Saiba Mais</a>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <img src="https://images.unsplash.com/photo-1550993962-e64e9a11ac89?q=80&w=2787&auto=format&fit=crop" alt="Projeto 4: E-commerce com React">
-                    <div class="project-card-content">
-                        <h3>E-commerce com React</h3>
-                        <a href="https://github.com/seu-usuario/react-ecommerce" target="_blank">Saiba Mais</a>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <img src="https://images.unsplash.com/photo-1581291518857-4e27b7483669?q=80&w=2800&auto=format&fit=crop" alt="Projeto 5: Landing Page Animada">
-                    <div class="project-card-content">
-                        <h3>Landing Page Animada</h3>
-                        <a href="https://github.com/seu-usuario/landing-page-animada" target="_blank">Saiba Mais</a>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -503,6 +519,32 @@
         function closeModal(id){
             document.getElementById(id).style.display = 'none';
         }
+
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+
+        function toggleDarkMode() {
+            body.classList.toggle('dark-mode');
+            const isDarkMode = body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode);
+            
+            if (isDarkMode) {
+                darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        }
+
+        // Verifica a preferência do usuário no carregamento da página
+        const prefersDarkMode = localStorage.getItem('darkMode') === 'true';
+        if (prefersDarkMode) {
+            body.classList.add('dark-mode');
+            darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        } else {
+            darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        }
+
+        darkModeToggle.addEventListener('click', toggleDarkMode);
     </script>
 </body>
 </html>
