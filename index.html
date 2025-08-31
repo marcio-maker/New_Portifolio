@@ -4,41 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfólio Márcio Maker</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ===== RESET ===== */
-        * { margin:0; padding:0; box-sizing:border-box; font-family: 'Roboto', sans-serif; }
-        body { background-color: #f9f9f9; color: #333; }
+        /* ===== RESET & TIPOGRAFIA ===== */
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { background-color: #e9f2ff; color: #333; font-family: 'Open Sans', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; }
 
         /* ===== HEADER ===== */
         header {
-            background: linear-gradient(135deg, #4B6CB7, #182848);
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
             color: white;
             text-align: center;
-            padding: 60px 20px;
+            padding: 80px 20px;
+            position: relative;
+            overflow: hidden;
         }
-        header h1 { font-family: 'Poppins', sans-serif; font-size: 2.5rem; margin-bottom: 10px; }
-        header p { font-size: 1.1rem; color: #dcdcdc; }
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            transform: skewY(-5deg);
+            transform-origin: top left;
+        }
+        header h1 { font-size: 3rem; margin-bottom: 10px; font-weight: 700; z-index: 1; position: relative; }
+        header p { font-size: 1.2rem; color: #e0eaff; z-index: 1; position: relative; }
 
         /* ===== SEÇÕES ===== */
         section { padding: 60px 5%; }
-        section h2 { font-family: 'Poppins', sans-serif; font-size: 2rem; margin-bottom: 30px; text-align:center; color:#182848; }
+        section h2 { font-size: 2.2rem; margin-bottom: 40px; text-align:center; color:#3a3f51; font-weight: 700; }
 
         /* ===== BOTÕES DE FILTRO ===== */
         .filter-btns { text-align:center; margin-bottom:40px; }
         .filter-btns button {
-            padding: 12px 25px;
-            margin:5px;
-            border:none;
-            border-radius:25px;
-            background-color:#4B6CB7;
-            color:white;
-            font-weight:600;
-            cursor:pointer;
-            transition: all 0.3s ease;
+            padding: 12px 28px;
+            margin: 8px;
+            border: none;
+            border-radius: 50px;
+            background-color: #2575fc;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
-        .filter-btns button:hover { background-color:#182848; }
+        .filter-btns button:hover {
+            background-color: #6a11cb;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
 
         /* ===== GRID DE HABILIDADES ===== */
         .skills-container {
@@ -50,16 +69,16 @@
             background: white;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.4s, box-shadow 0.4s;
             cursor: pointer;
             display: flex;
             flex-direction: column;
             text-align: center;
         }
         .skill-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
         }
         .skill-card .icon { 
             width: 100%;
@@ -67,13 +86,91 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #eef3f7; /* Cor de fundo para o ícone */
+            background-color: #f0f4f9;
             font-size: 5rem;
-            color: #4B6CB7;
+            color: #2575fc;
+            transition: color 0.4s;
         }
-        .skill-card-content { padding: 20px; flex:1; }
-        .skill-card h3 { font-family: 'Poppins', sans-serif; margin-bottom: 10px; color: #4B6CB7; }
-        .skill-card p { font-size: 0.95rem; color: #555; }
+        .skill-card:hover .icon {
+            color: #6a11cb;
+        }
+        .skill-card-content { padding: 25px; flex:1; }
+        .skill-card h3 { font-size: 1.5rem; margin-bottom: 10px; color: #3a3f51; font-weight: 600; }
+        .skill-card p { font-size: 1rem; color: #666; }
+
+        /* ===== CARROSSEL DE PROJETOS ===== */
+        #projects {
+            background-color: #f0f4f9;
+        }
+        .carousel-container {
+            overflow: hidden;
+            position: relative;
+            padding: 20px 0;
+        }
+        .carousel-track {
+            display: flex;
+            width: fit-content;
+            animation: scroll 30s linear infinite;
+        }
+        .project-card {
+            min-width: 300px;
+            height: 350px;
+            margin: 0 15px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+        }
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            object-position: top;
+        }
+        .project-card-content {
+            padding: 20px;
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .project-card-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #3a3f51;
+        }
+        .project-card-content a {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 50px;
+            background-color: #2575fc;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        .project-card-content a:hover {
+            background-color: #6a11cb;
+        }
+        
+        /* Animação do carrossel */
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-330px * 5)); }
+        }
+        
+        /* Pausar animação no hover */
+        .carousel-container:hover .carousel-track {
+            animation-play-state: paused;
+        }
 
         /* ===== MODAL ===== */
         .modal {
@@ -81,58 +178,88 @@
             position:fixed;
             top:0; left:0;
             width:100%; height:100%;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0,0,0,0.8);
             justify-content:center;
             align-items:center;
             z-index:1000;
             padding: 20px;
+            animation: fadeIn 0.4s forwards;
         }
         .modal-content {
             background:white;
             padding:30px;
-            border-radius:15px;
-            max-width:600px;
+            border-radius:20px;
+            max-width:700px;
             width:90%;
             position:relative;
             text-align:left;
             max-height: 90vh;
             overflow-y: auto;
+            animation: slideIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
         }
-        .modal-content h3 { color:#4B6CB7; margin-bottom:15px; }
-        .modal-content p { color:#333; margin-bottom:15px; line-height: 1.6; }
+        .modal-content h3 { color:#6a11cb; margin-bottom:15px; font-size: 2rem; font-weight: 700; }
+        .modal-content p { color:#444; margin-bottom:15px; line-height: 1.8; }
         .modal-content .modal-icon { 
             display: block;
             text-align: center;
-            font-size: 6rem;
-            color: #4B6CB7;
-            margin-bottom: 20px;
+            font-size: 7rem;
+            color: #2575fc;
+            margin-bottom: 25px;
         }
         .close-modal {
             position:absolute;
             top:15px; right:15px;
-            background:#4B6CB7;
+            background:#2575fc;
             color:white;
             border:none;
             border-radius:50%;
-            width:30px; height:30px;
+            width:40px; height:40px;
+            font-size: 1.5rem;
             cursor:pointer;
-            font-weight:bold;
-            line-height:28px;
-            text-align:center;
+            transition: all 0.3s ease;
         }
-        .modal-content h4 { font-family: 'Poppins', sans-serif; margin-top: 20px; margin-bottom: 10px; color: #182848; }
+        .close-modal:hover {
+            background-color: #6a11cb;
+            transform: rotate(90deg);
+        }
+        .modal-content h4 { font-size: 1.2rem; margin-top: 20px; margin-bottom: 10px; color: #3a3f51; font-weight: 600; }
         .modal-content ul { margin-bottom: 15px; padding-left: 20px; }
-        .modal-content li { margin-bottom: 5px; }
+        .modal-content li { margin-bottom: 8px; line-height: 1.6; }
 
         /* ===== FOOTER ===== */
         footer { background-color:#182848; color:white; text-align:center; padding:25px 20px; font-size:0.95rem; }
 
+        /* ===== ANIMAÇÕES ===== */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
         /* ===== RESPONSIVO ===== */
-        @media(max-width:600px){
-            header h1 { font-size: 2rem; }
-            section h2 { font-size: 1.6rem; }
+        @media(max-width: 768px){
+            header h1 { font-size: 2.2rem; }
+            header p { font-size: 1rem; }
+            section { padding: 40px 5%; }
+            section h2 { font-size: 1.8rem; margin-bottom: 30px; }
+            .filter-btns button { padding: 10px 20px; margin: 4px; }
             .skill-card .icon { font-size: 4rem; height: 150px; }
+            .modal-content { padding: 25px; }
+            .modal-content h3 { font-size: 1.6rem; }
             .modal-content .modal-icon { font-size: 5rem; }
+            
+            .carousel-track {
+                animation: scroll-mobile 40s linear infinite;
+            }
+        }
+        
+        @keyframes scroll-mobile {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-330px * 5)); }
         }
     </style>
 </head>
@@ -140,7 +267,7 @@
 
     <header>
         <h1>Márcio Maker</h1>
-        <p>Desenvolvedor Frontend & Fullstack Júnior | React, Next.js, Tailwind, CSS, APIs, Animações</p>
+        <p>Desenvolvedor Frontend & Fullstack Júnior | React, Next.js, APIs e Animações</p>
     </header>
 
     <section id="skills">
@@ -194,6 +321,85 @@
                 </div>
             </div>
 
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2>Meus Projetos</h2>
+        <div class="carousel-container">
+            <div class="carousel-track">
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1550993962-e64e9a11ac89?q=80&w=2787&auto=format&fit=crop" alt="Projeto 1: Clone do Spotify">
+                    <div class="project-card-content">
+                        <h3>Clone do Spotify</h3>
+                        <a href="https://github.com/seu-usuario/clone-spotify" target="_blank">Saiba Mais</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1581291518857-4e27b7483669?q=80&w=2800&auto=format&fit=crop" alt="Projeto 2: App de Previsão do Tempo">
+                    <div class="project-card-content">
+                        <h3>App de Previsão do Tempo</h3>
+                        <a href="https://github.com/seu-usuario/previsao-do-tempo-app" target="_blank">Saiba Mais</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1581291518857-4e27b7483669?q=80&w=2800&auto=format&fit=crop" alt="Projeto 3: Blog Moderno com Next.js">
+                    <div class="project-card-content">
+                        <h3>Blog Moderno com Next.js</h3>
+                        <a href="https://github.com/seu-usuario/nextjs-blog" target="_blank">Saiba Mais</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1550993962-e64e9a11ac89?q=80&w=2787&auto=format&fit=crop" alt="Projeto 4: E-commerce com React">
+                    <div class="project-card-content">
+                        <h3>E-commerce com React</h3>
+                        <a href="https://github.com/seu-usuario/react-ecommerce" target="_blank">Saiba Mais</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1581291518857-4e27b7483669?q=80&w=2800&auto=format&fit=crop" alt="Projeto 5: Landing Page Animada">
+                    <div class="project-card-content">
+                        <h3>Landing Page Animada</h3>
+                        <a href="https://github.com/seu-usuario/landing-page-animada" target="_blank">Saiba Mais</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1550993962-e64e9a11ac89?q=80&w=2787&auto=format&fit=crop" alt="Projeto 1: Clone do Spotify">
+                    <div class="project-card-content">
+                        <h3>Clone do Spotify</h3>
+                        <a href="https://github.com/seu-usuario/clone-spotify" target="_blank">Saiba Mais</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1581291518857-4e27b7483669?q=80&w=2800&auto=format&fit=crop" alt="Projeto 2: App de Previsão do Tempo">
+                    <div class="project-card-content">
+                        <h3>App de Previsão do Tempo</h3>
+                        <a href="https://github.com/seu-usuario/previsao-do-tempo-app" target="_blank">Saiba Mais</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1581291518857-4e27b7483669?q=80&w=2800&auto=format&fit=crop" alt="Projeto 3: Blog Moderno com Next.js">
+                    <div class="project-card-content">
+                        <h3>Blog Moderno com Next.js</h3>
+                        <a href="https://github.com/seu-usuario/nextjs-blog" target="_blank">Saiba Mais</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1550993962-e64e9a11ac89?q=80&w=2787&auto=format&fit=crop" alt="Projeto 4: E-commerce com React">
+                    <div class="project-card-content">
+                        <h3>E-commerce com React</h3>
+                        <a href="https://github.com/seu-usuario/react-ecommerce" target="_blank">Saiba Mais</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1581291518857-4e27b7483669?q=80&w=2800&auto=format&fit=crop" alt="Projeto 5: Landing Page Animada">
+                    <div class="project-card-content">
+                        <h3>Landing Page Animada</h3>
+                        <a href="https://github.com/seu-usuario/landing-page-animada" target="_blank">Saiba Mais</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
